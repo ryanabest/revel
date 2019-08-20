@@ -1,0 +1,163 @@
+* {
+  box-sizing: border-box;
+  background-color: #161616;
+  color: #fff;
+  font-family: 'Work Sans', sans-serif;
+}
+
+svg {
+  path.line {
+    fill: none;
+    stroke-width: 2px;
+    stroke: #008BBF;
+  }
+  cursor: crosshair;
+}
+
+.row {
+  width: 100%;
+  max-width: 1500px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+
+
+.column {
+  flex: 50%;
+  max-width: 50%;
+  padding: 0.5rem;
+  margin: auto;
+
+  @media screen and (max-width: 800px) {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+h1.hed {
+  font-size: 1.125rem;
+  font-weight: 700;
+  // padding-left: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+
+  @media screen and (max-width: 800px) {
+    font-size: 1rem;
+  }
+}
+
+.date-slider {
+  position: relative;
+}
+
+input {
+  height: 30px;
+  display: absolute;
+  top: 50%;
+  transform: translateY(50%);
+  background-color: #3d3d3d;
+  border: none;
+  cursor: pointer;
+
+  @media screen and (max-width: 800px) {
+    flex: 25%;
+    max-width: 25%;
+  }
+}
+
+#slider {
+  width: 310px;
+  max-width: 310px;
+  @media screen and (max-width: 800px) {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+g.tick {
+  line {
+    stroke: #3d3d3d;
+  }
+}
+
+#granularity-select {
+  button {
+    background-color: #3d3d3d;
+    border: none;
+    padding: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+
+    @media screen and (max-width: 800px) {
+      width: 30%;
+    }
+
+    &.active, &:hover {
+      background-color: #fff;
+      color: #3d3d3d;
+    }
+  }
+}
+
+rect.hover-rect {
+  opacity: 0;
+  // fill: #fff;
+  // border: #000;
+}
+
+circle.hover-circle {
+  fill: #fff;
+  stroke: #008BBF;
+  stroke-width: 2px;
+  display:none;
+}
+
+#tooltip {
+  position: absolute;
+  border: 1px solid white;
+  background:rgba(0,0,0,0.4);
+  padding: 10px;
+  display:none;
+
+  * {
+    background: none;
+    // color: black;
+  }
+
+  h1 {
+    font-size: 14px;
+    font-family: 'Roboto Mono', monospace;
+
+    @media screen and (max-width: 800px) {
+      font-size: 10px;
+    }
+  }
+  table {
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    * {
+      font-size: 14px;
+      font-family: 'Roboto Mono', monospace;
+
+      @media screen and (max-width: 800px) {
+        font-size: 10px;
+      }
+    }
+
+    th, td {
+      border-bottom: 1px solid gray;
+      font-weight: 400;
+      padding: 7px;
+    }
+
+    td.td-num {
+      text-align: right;
+    }
+
+    td {
+
+    }
+  }
+}

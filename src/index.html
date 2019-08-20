@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500|Roboto+Mono:400,600,700" rel="stylesheet">
+    <!--[htmlclean-protect]-->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!--[/htmlclean-protect]-->
+  </head>
+  <body>
+    <div id="container">
+      <div id="date-slider" class="row">
+        <input type="date" id="start-date"></input>
+        <div id="slider"></div>
+        <input type="date" id="end-date"></input>
+      </div>
+      <div id="granularity-select" class="row">
+        <button id="hourly" class="granularity">Hourly</button>
+        <button id="daily" class="granularity">Daily</button>
+        <button id="weekly" class="granularity active">Weekly</button>
+      </div>
+      <div id="viz" class="row">
+        <div id="tooltip"></div>
+        <div id="trips" class="column">
+          <h1 class="hed">Trips Taken</h1>
+        </div>
+        <div id="distance" class="column">
+          <h1 class="hed">Distance Traveled (mi.)</h1>
+        </div>
+      </div>
+    </div>
+    <!--[htmlclean-protect]-->
+    <!-- inject:js -->
+    <!-- endinject -->
+    <!--[/htmlclean-protect]-->
+</body>
+</html>
