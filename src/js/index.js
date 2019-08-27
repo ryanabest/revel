@@ -8,18 +8,21 @@ d3.json("assets/data.json")
 
   data.hourly.forEach(d=> {
     d.date = parseTime(d.Date);
+    d.distance = d.Distance/5280;
   })
   data.weekly.forEach(d=> {
     d.date = parseTime(d.Date);
+    d.distance = d.Distance/5280;
   })
   data.daily.forEach(d=> {
     d.date = parseTime(d.Date);
+    d.distance = d.Distance/5280;
   })
 
-  console.log(data);
+  // console.log(data);
 
-  let distMin = d3.min(data[dataType],d=>d.Distance);
-  let distMax = d3.max(data[dataType],d=>d.Distance);
+  let distMin = d3.min(data[dataType],d=>d.distance);
+  let distMax = d3.max(data[dataType],d=>d.distance);
   let tripsMin = d3.min(data[dataType],d=>d.Count);
   let tripsMax = d3.max(data[dataType],d=>d.Count);
   let timeMin = d3.min(data[dataType],d=>d.date);
@@ -90,12 +93,15 @@ d3.json("assets/data.json")
     // let bcr = d3.select("#container").node().getBoundingClientRect();
     let distancebcr = d3.select('#distance').node().getBoundingClientRect();
     let baseheight;
+
+    var ratio = window.devicePixelRatio || 1;
+    console.log(screen.width * ratio);
     if (screen.width > 800) {
       baseHeight = 650;
-      sliderRange.width(250).ticks(2);
+      sliderRange.width(200).ticks(2);
     } else {
       baseHeight = screen.height * 0.3;
-      sliderRange.width(screen.width * 0.29).ticks(0);
+      sliderRange.width(screen.width * 0.25).ticks(0);
       d3.select('div#slider').select('svg').attr('width',screen.width*0.5)
     }
     let margin = {top:20,left:0,right:80,bottom:20};
@@ -117,7 +123,7 @@ d3.json("assets/data.json")
 
     // console.log(xScale(timeMin),xScale(timeMax));
     let tripsLine = d3.line().x(d=>xScale(d.date)).y(d=>tripsYScale(d.Count)).curve(d3.curveStep);
-    let distLine = d3.line().x(d=>xScale(d.date)).y(d=>distYScale(d.Distance)).curve(d3.curveStep);
+    let distLine = d3.line().x(d=>xScale(d.date)).y(d=>distYScale(d.distance)).curve(d3.curveStep);
 
     let paths = d3.select('#distance').select('svg').selectAll('path');
 
@@ -126,7 +132,7 @@ d3.json("assets/data.json")
                   .tickFormat(d3.timeFormat("%m/%d/%y"));
 
     let distAxis = d3.axisRight(distYScale).tickFormat(d3.format(".2s")).tickSize(-width);
-    let tripAxis = d3.axisRight(tripsYScale).tickSize(-width);
+    let tripAxis = d3.axisRight(tripsYScale).tickFormat(d3.format(".2s")).tickSize(-width);
 
     d3.select('path#distance-line').transition(750).attr('d',distLine);
     d3.select('path#trips-line').transition(750).attr('d',tripsLine);
@@ -184,12 +190,12 @@ d3.json("assets/data.json")
 
           d3.select('circle#dist-hover-circle')
             .attr('cx',xScale(tripsData[i].date))
-            .attr('cy',distYScale(tripsData[i].Distance))
+            .attr('cy',distYScale(tripsData[i].distance))
 
 
           tooltipHTML += `<h1>`+tripsData[i].Date+`</h1>`
           tooltipHTML += `<table><tr><th>Trips</th><th>Distance (mi.)</th></tr>`
-          tooltipHTML += `<tr><td>`+d3.format(",")(tripsData[i].Count)+`</td><td>`+d3.format(".2s")(tripsData[i].Distance)+`</td></tr></table>`
+          tooltipHTML += `<tr><td>`+d3.format(",")(tripsData[i].Count)+`</td><td>`+d3.format(".2s")(tripsData[i].distance)+`</td></tr></table>`
           tooltip.html(tooltipHTML);
           // console.log(tripsData[i]);
           break;
@@ -251,8 +257,8 @@ d3.json("assets/data.json")
     data[dataType].forEach(row => {
       row.date <= timeMax && row.date >= timeMin ? maxMinData.push(row) : maxMinData.push();
     });
-    let distMin  = d3.min(maxMinData,d=>d.Distance);
-    let distMax  = d3.max(maxMinData,d=>d.Distance);
+    let distMin  = d3.min(maxMinData,d=>d.distance);
+    let distMax  = d3.max(maxMinData,d=>d.distance);
     let tripsMin = d3.min(maxMinData,d=>d.Count);
     let tripsMax = d3.max(maxMinData,d=>d.Count);
     return [distMin,distMax,tripsMin,tripsMax,maxMinData];
